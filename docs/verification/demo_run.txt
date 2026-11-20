@@ -1,0 +1,49 @@
+
+== 1. Create a sensitive sample file
+-rw-r--r-- 1 root root 3000059 Nov 20 07:44 /tmp/demo/secret.txt
+41875de40ae1fa7f59fa4066ec25f1c88be25844b9166e95a0da4e8b23c95353  /tmp/demo/secret.txt
+
+== 2. Encrypt -> secret.txt.enc (AES-256-GCM + PBKDF2)
+Encrypted: /tmp/demo/secret.txt -> /tmp/demo/secret.txt.enc
+-rw------- 1 root root 3000143 Nov 20 07:44 /tmp/demo/secret.txt.enc
+
+== 3. Inspect container metadata (no password needed)
+File:        /tmp/demo/secret.txt.enc
+Format:      fileprotect v1
+Cipher:      AES-256-GCM (authenticated)
+KDF:         PBKDF2-HMAC-SHA256, 600,000 iterations
+Salt:        33f5dc598e85876668d1600b311f924e
+Chunk size:  1,048,576 bytes
+Chunks:      3
+Plaintext:   3,000,059 bytes
+
+== 4. Ciphertext does not contain the plaintext
+0
+no plaintext found in .enc (grep count 0)
+First 48 bytes of .enc (header + start of ciphertext):
+ 46 50 55 31 01 00 09 27 c0 00 10 00 00 33 f5 dc
+ 59 8e 85 87 66 68 d1 60 0b 31 1f 92 4e cd 34 76
+ 2f 1f ca 4e 0e b7 b7 8e c9 99 d8 41 2a 28 66 2a
+
+== 5. Decrypt with the correct password
+Decrypted: /tmp/demo/secret.txt.enc -> /tmp/demo/secret.txt  [integrity verified]
+exit code: 0
+41875de40ae1fa7f59fa4066ec25f1c88be25844b9166e95a0da4e8b23c95353  /tmp/demo/secret.txt
+SHA-256 MATCH: decrypted file is identical to the original
+
+== 6. Wrong password is rejected (MAC verification fails)
+error: Authentication failed: wrong password, or the file is corrupted or has been tampered with.
+exit code: 3
+no output file was created
+
+== 7. Tampered ciphertext is rejected (1 flipped byte)
+error: Authentication failed: wrong password, or the file is corrupted or has been tampered with.
+exit code: 3
+
+== 8. Truncated ciphertext is rejected
+error: Authentication failed: wrong password, or the file is corrupted or has been tampered with.
+exit code: 3
+
+== 9. Existing output is never overwritten silently
+error: Output file already exists: /tmp/demo/secret.txt (use --force to overwrite).
+exit code: 1

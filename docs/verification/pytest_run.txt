@@ -1,0 +1,57 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.2.0, pluggy-1.7.0 -- /usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/claude/file-protection-utility
+configfile: pyproject.toml
+testpaths: tests
+plugins: platformdirs-4.13.0
+collecting ... collected 46 items
+
+tests/test_cli.py::test_roundtrip_via_cli PASSED                         [  2%]
+tests/test_cli.py::test_wrong_password_exit_code_3 PASSED                [  4%]
+tests/test_cli.py::test_tampered_file_exit_code_3 PASSED                 [  6%]
+tests/test_cli.py::test_password_file_beats_env PASSED                   [  8%]
+tests/test_cli.py::test_no_password_non_interactive PASSED               [ 10%]
+tests/test_cli.py::test_missing_file_and_existing_output PASSED          [ 13%]
+tests/test_cli.py::test_remove_source_and_quiet PASSED                   [ 15%]
+tests/test_cli.py::test_info_command PASSED                              [ 17%]
+tests/test_cli.py::test_info_on_non_container PASSED                     [ 19%]
+tests/test_cli.py::test_usage_errors PASSED                              [ 21%]
+tests/test_crypto.py::test_roundtrip_sizes[0] PASSED                     [ 23%]
+tests/test_crypto.py::test_roundtrip_sizes[1] PASSED                     [ 26%]
+tests/test_crypto.py::test_roundtrip_sizes[63] PASSED                    [ 28%]
+tests/test_crypto.py::test_roundtrip_sizes[64] PASSED                    [ 30%]
+tests/test_crypto.py::test_roundtrip_sizes[65] PASSED                    [ 32%]
+tests/test_crypto.py::test_roundtrip_sizes[320] PASSED                   [ 34%]
+tests/test_crypto.py::test_roundtrip_sizes[327] PASSED                   [ 36%]
+tests/test_crypto.py::test_unicode_password_is_normalised PASSED         [ 39%]
+tests/test_crypto.py::test_key_derivation_matches_reference_pbkdf2 PASSED [ 41%]
+tests/test_crypto.py::test_output_is_randomised_and_hides_plaintext PASSED [ 43%]
+tests/test_crypto.py::test_wrong_password_fails PASSED                   [ 45%]
+tests/test_crypto.py::test_bit_flip_detected[header_salt] PASSED         [ 47%]
+tests/test_crypto.py::test_bit_flip_detected[header_iters] PASSED        [ 50%]
+tests/test_crypto.py::test_bit_flip_detected[first_chunk] PASSED         [ 52%]
+tests/test_crypto.py::test_bit_flip_detected[last_tag] PASSED            [ 54%]
+tests/test_crypto.py::test_truncation_at_chunk_boundary_detected PASSED  [ 56%]
+tests/test_crypto.py::test_truncated_mid_chunk_detected PASSED           [ 58%]
+tests/test_crypto.py::test_appended_data_detected PASSED                 [ 60%]
+tests/test_crypto.py::test_chunk_reordering_detected PASSED              [ 63%]
+tests/test_crypto.py::test_invalid_container[] PASSED                    [ 65%]
+tests/test_crypto.py::test_invalid_container[short] PASSED               [ 67%]
+tests/test_crypto.py::test_invalid_container[XXXX\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00] PASSED [ 69%]
+tests/test_crypto.py::test_invalid_container[FPU1\t\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00] PASSED [ 71%]
+tests/test_crypto.py::test_header_only_is_truncated PASSED               [ 73%]
+tests/test_crypto.py::test_hostile_header_parameters_rejected PASSED     [ 76%]
+tests/test_crypto.py::test_parameter_validation PASSED                   [ 78%]
+tests/test_crypto.py::test_file_roundtrip_and_default_names PASSED       [ 80%]
+tests/test_crypto.py::test_default_decrypt_name_without_enc_suffix PASSED [ 82%]
+tests/test_crypto.py::test_refuses_overwrite_unless_forced PASSED        [ 84%]
+tests/test_crypto.py::test_failed_decrypt_leaves_no_output_or_temp_files PASSED [ 86%]
+tests/test_crypto.py::test_failed_decrypt_does_not_clobber_existing_file PASSED [ 89%]
+tests/test_crypto.py::test_same_file_rejected PASSED                     [ 91%]
+tests/test_crypto.py::test_directory_output_rejected PASSED              [ 93%]
+tests/test_crypto.py::test_missing_input PASSED                          [ 95%]
+tests/test_crypto.py::test_output_permissions_are_private PASSED         [ 97%]
+tests/test_crypto.py::test_nonce_layout PASSED                           [100%]
+
+============================== 46 passed   ==============================
